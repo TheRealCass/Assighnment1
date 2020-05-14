@@ -6,7 +6,7 @@
  * @author   Rubait Ul Ahamed, 007876180
  * @version (13th May 2020)
  * 
- * methods:
+ * methods: main
  * Description:
  */
 public class AhamedRubaitA1Q1 {
