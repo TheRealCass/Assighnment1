@@ -39,7 +39,80 @@ public class AhamedRubaitA1Q1 {
  */
 class Book{
 
-    
+    //book info
+    private String title;
+    private String authorFirstName;
+    private String authorLastName;
+
+    boolean onLoan;
+
+    /**
+     * constructor
+     * @param firstParam
+     */
+    public Book(String title, String FirstName, String lastName){
+
+        this.title = title;
+        authorFirstName = FirstName;
+        authorLastName = lastName;
+        onLoan = false;
+
+    }
+
+    /**
+     * Method name: getInitials
+     * @param void
+     * @return (String) the initial of the author
+     *          Ex- Gaimen, N. (for Neil Gaimen)
+     */
+    public String getInitials(){
+        String toReturn = "";
+        toReturn = authorLastName + ", ";
+        toReturn += authorFirstName.charAt(0) + ".";
+        return toReturn;
+    }
+
+    /**
+     * Method name: giveOnLoan
+     * @param void
+     * @return (void) sets the boolean flag onLoad to true
+     */
+    public void giveOnLoan(){
+        onLoan = true;
+    }
+
+    /**
+     * Method name: recieveBook
+     * @param void
+     * @return (void) sets the boolean flag onLoad to false
+     */
+    public void recieveBook(){
+        onLoan = false;
+    }
+
+    /**
+     * Method Name: toString
+     * @param void
+     * @return (String) returns the title, authors initals and weather it's on loan or not
+     *                  Ex- "American Gods" - Gaimen, N. (inLibrary/onLoan)
+     */
+    public String toString(){
+        String toReturn = "";
+        toReturn += "\'" + title + "\'";
+        toReturn += " - " + getInitials();
+        toReturn += "(";
+        if(onLoan){
+            toReturn += "on loan";
+        } else {
+            toReturn += "inLibrary";
+        }
+        toReturn += ")";
+        return toReturn;
+    }
+
+
+
+
 
 
 
