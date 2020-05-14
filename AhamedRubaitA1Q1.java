@@ -185,14 +185,11 @@ class Library{
 
     /**
      * Method name: addBook
-     * @param   String title of the book
-     * @param   String author's first name
-     * @param   String author's last name
+     * @param   Book
      * @return (void) adds books to the array
      */
-    public void addBook(String lastName, String firstName, String title){
+    public void addBook(Book toAdd){
         if(bookCount <= MAX_BOOKS){
-            Book toAdd = new Book(title, firstName, lastName);
             bookShelf[bookCount] = toAdd;
             bookCount++;
         } else {
@@ -206,19 +203,47 @@ class Library{
     /**
      * Method name: listByAuthor
      * @param   String 
-     * @return (void) 
+     * @return (String) list containing all the books by the author with te same last name
      */
-    public String listByAuthor(String AuthorFirstName, String AuthorLastName){
-        String toReturn = "";
-        for (Book match : bookShelf) {
-            boolean lastName = match.getAuthorLastName(
-            boolean firstName
-
-            if(){
-
+    public String listByAuthor(String authorLastName){
+        String toReturn = "Books by " + authorLastName + ":\n";
+        for (Book book : bookShelf) {
+            boolean match = authorLastName.equals(book.getAuthorLastName()); 
+            if(match){
+                toReturn += book.toString() + "\n";
             }
         }
         return toReturn;
+        
+    }
+
+    /**
+     * Method name: listByTitle
+     * @param   String 
+     * @return (String) lsit contailed all the books with matching name in the param
+     */
+    public String listByTitle(String bookTitle){
+        String toReturn = "Books named " + bookTitle + ":\n";
+        for (Book book : bookShelf) {
+            boolean match = bookTitle.equals(book.getTitle()); 
+            if(match){
+                toReturn += book.toString() + "\n";
+            }
+        }
+        return toReturn;
+        
+    }
+
+
+    /**
+     * Method name: loadBook
+     * @param String last naem of the author
+     * @param String first name of the author
+     * @param String title of the book
+     * @return (boolean) true if the book is avalable on loan;
+     *                   fasle if not
+     */
+    public boolean loanBook(){
         
     }
 }
