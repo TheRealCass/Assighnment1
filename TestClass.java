@@ -1,11 +1,21 @@
-
+import java.io.InputStream;
 
 public class TestClass {
     
     public static void main(String[] args) {
 
-        String s = "A";
-        System.out.print((int) s.charAt(0));
+
+        String h = "boobs";
+        String p = "boobS";
+        boolean result = h.equals(p);
+        System.out.print(result);
+
+
+
+
+
+        // String s = "A";
+        // System.out.print((int) s.charAt(0));
 
 
         

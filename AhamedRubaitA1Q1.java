@@ -62,6 +62,37 @@ class Book{
 
     }
 
+
+    /**
+     * Method name: getTitle
+     * @param void
+     * @return (String) the title of the book
+     */
+    public String getTitle() {
+        return this.title;
+    }
+
+
+    /**
+     * Method name: getAuthorFirstName
+     * @param void
+     * @return (String) the first name of the author
+     */
+    public String getAuthorFirstName() {
+        return this.authorFirstName;
+    }
+
+
+    /**
+     * Method name: getAuthorLastName
+     * @param void
+     * @return (String) the author's last name
+     */
+    public String getAuthorLastName() {
+        return this.authorLastName;
+    }
+
+
     /**
      * Method name: getInitials
      * @param void
@@ -70,8 +101,8 @@ class Book{
      */
     public String getInitials(){
         String toReturn = "";
-        toReturn += authorLastName;
-        toReturn += ", " + authorFirstName;
+        toReturn += getAuthorLastName();
+        toReturn += ", " + getAuthorFirstName();
         return toReturn;
     }
 
@@ -101,7 +132,7 @@ class Book{
      */
     public String toString(){
         String toReturn = getInitials();
-        toReturn += ", " + title;
+        toReturn += ", " + getTitle();
         toReturn += "(";
         if(DEBUG){
             if(onLoan){
@@ -112,13 +143,8 @@ class Book{
         }
         toReturn += ")";
         return toReturn;
+
     }
-
-
-
-
-
-
 
 }
 
@@ -164,7 +190,7 @@ class Library{
      * @param   String author's last name
      * @return (void) adds books to the array
      */
-    public void addBook(String title, String firstName, String lastName){
+    public void addBook(String lastName, String firstName, String title){
         if(bookCount <= MAX_BOOKS){
             Book toAdd = new Book(title, firstName, lastName);
             bookShelf[bookCount] = toAdd;
@@ -174,6 +200,26 @@ class Library{
                 System.out.println("Can not add book to library. Not enough space in  program memory.");
             return;
         }
+    }
+
+
+    /**
+     * Method name: listByAuthor
+     * @param   String 
+     * @return (void) 
+     */
+    public String listByAuthor(String AuthorFirstName, String AuthorLastName){
+        String toReturn = "";
+        for (Book match : bookShelf) {
+            boolean lastName = match.getAuthorLastName(
+            boolean firstName
+
+            if(){
+
+            }
+        }
+        return toReturn;
+        
     }
 }
 
