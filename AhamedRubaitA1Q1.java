@@ -64,6 +64,17 @@ class Book{
 
 
     /**
+
+     * Method name: getStatus
+     * @param void
+     * @return (boolean) the onLoad variable
+     */
+    public boolean getStatus(){
+        return this.onLoan;
+    }
+
+
+    /**
      * Method name: getTitle
      * @param void
      * @return (String) the title of the book
@@ -246,6 +257,16 @@ class Library{
     public boolean loanBook(){
         
     }
+
+     * @return (void) 
+     */
+    public String listByAuthor(String firstName, String lastName){
+        String toReturn = "";
+        
+        return toReturn;
+        
+    }
+
 }
 
 //==============================================================================================
