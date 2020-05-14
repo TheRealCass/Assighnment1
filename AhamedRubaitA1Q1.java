@@ -66,12 +66,12 @@ class Book{
      * Method name: getInitials
      * @param void
      * @return (String) the initial of the author
-     *          Ex- Gaimen, N. (for Neil Gaimen)
+     *          Ex- Gaimen, Neil
      */
     public String getInitials(){
         String toReturn = "";
-        toReturn = authorLastName + ", ";
-        toReturn += authorFirstName.charAt(0) + ".";
+        toReturn += authorLastName;
+        toReturn += ", " + authorFirstName;
         return toReturn;
     }
 
@@ -97,12 +97,10 @@ class Book{
      * Method Name: toString
      * @param void
      * @return (String) returns the title, authors initals and weather it's on loan or not
-     *                  Ex- "American Gods" - Gaimen, N. (inLibrary/onLoan)
+     *                  Ex- "American Gods" - Gaimen, Neil(inLibrary/onLoan)
      */
     public String toString(){
-        String toReturn = "";
-        toReturn += authorLastName;
-        toReturn += ", " + authorFirstName;
+        String toReturn = getInitials();
         toReturn += ", " + title;
         toReturn += "(";
         if(DEBUG){
@@ -137,8 +135,15 @@ class Book{
  * 
  * methods:
  * Description:
+ * Limitations: Library can only hold MAX_BOOKS ammount. This can be set with respect to each systems config
  */
 class Library{
+
+    private Book[] bookShelf;
+    private int bookCount;
+    private final int MAX_BOOKS = 50000;
+
+    private final boolean DEBUG = true;
 
     
 
@@ -147,7 +152,28 @@ class Library{
      * @param void
      */
     public Library(){
+        bookShelf = new Book[MAX_BOOKS];
+        bookCount = 0;
+    }
 
+
+    /**
+     * Method name: addBook
+     * @param   String title of the book
+     * @param   String author's first name
+     * @param   String author's last name
+     * @return (void) adds books to the array
+     */
+    public void addBook(String title, String firstName, String lastName){
+        if(bookCount <= MAX_BOOKS){
+            Book toAdd = new Book(title, firstName, lastName);
+            bookShelf[bookCount] = toAdd;
+            bookCount++;
+        } else {
+            if (DEBUG)
+                System.out.println("Can not add book to library. Not enough space in  program memory.");
+            return;
+        }
     }
 }
 
