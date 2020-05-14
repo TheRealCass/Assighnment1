@@ -139,7 +139,42 @@ class Book{
  */
 class Library{
 
-   
+    private Book[] bookShelf;
+    private int bookCount;
+    private final int MAX_BOOKS = 50000;
+
+    private final boolean DEBUG = true;
+
+    
+
+    /**
+     * constructor for Library
+     * @param void
+     */
+    public Library(){
+        bookShelf = new Book[MAX_BOOKS];
+        bookCount = 0;
+    }
+
+
+    /**
+     * Method name: addBook
+     * @param   String title of the book
+     * @param   String author's first name
+     * @param   String author's last name
+     * @return (void) adds books to the array
+     */
+    public void addBook(String title, String firstName, String lastName){
+        if(bookCount <= MAX_BOOKS){
+            Book toAdd = new Book(title, firstName, lastName);
+            bookShelf[bookCount] = toAdd;
+            bookCount++;
+        } else {
+            if (DEBUG)
+                System.out.println("Can not add book to library. Not enough space in  program memory.");
+            return;
+        }
+    }
 }
 
 //==============================================================================================
