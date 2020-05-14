@@ -1,3 +1,4 @@
+//==============================================================================================
 /**
  * Class Name: AhamedShoumikA1Q1
  * 
@@ -44,7 +45,9 @@ class Book{
     private String authorFirstName;
     private String authorLastName;
 
-    boolean onLoan;
+    private boolean onLoan;
+
+    private final boolean DEBUG = true;
 
     /**
      * constructor
@@ -98,13 +101,16 @@ class Book{
      */
     public String toString(){
         String toReturn = "";
-        toReturn += "\'" + title + "\'";
-        toReturn += " - " + getInitials();
+        toReturn += authorLastName;
+        toReturn += ", " + authorFirstName;
+        toReturn += ", " + title;
         toReturn += "(";
-        if(onLoan){
-            toReturn += "on loan";
-        } else {
-            toReturn += "inLibrary";
+        if(DEBUG){
+            if(onLoan){
+                toReturn += "onLoan";
+            } else {
+                toReturn += "inLibrary";
+            }
         }
         toReturn += ")";
         return toReturn;
@@ -143,8 +149,6 @@ class Library{
     public Library(){
 
     }
-
-
-
-
 }
+
+//==============================================================================================
