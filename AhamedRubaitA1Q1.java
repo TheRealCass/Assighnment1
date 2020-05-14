@@ -62,6 +62,47 @@ class Book{
 
     }
 
+
+    /**
+     * Method name: getStatus
+     * @param void
+     * @return (boolean) the onLoad variable
+     */
+    public boolean getStatus(){
+        return this.onLoan;
+    }
+
+
+    /**
+     * Method name: getTitle
+     * @param void
+     * @return (String) the title of the book
+     */
+    public String getTitle() {
+        return this.title;
+    }
+
+
+    /**
+     * Method name: getAuthorFirstName
+     * @param void
+     * @return (String) the first name of the author
+     */
+    public String getAuthorFirstName() {
+        return this.authorFirstName;
+    }
+
+
+    /**
+     * Method name: getAuthorLastName
+     * @param void
+     * @return (String) the author's last name
+     */
+    public String getAuthorLastName() {
+        return this.authorLastName;
+    }
+
+
     /**
      * Method name: getInitials
      * @param void
@@ -70,8 +111,8 @@ class Book{
      */
     public String getInitials(){
         String toReturn = "";
-        toReturn += authorLastName;
-        toReturn += ", " + authorFirstName;
+        toReturn += getAuthorLastName();
+        toReturn += ", " + getAuthorFirstName();
         return toReturn;
     }
 
@@ -101,7 +142,7 @@ class Book{
      */
     public String toString(){
         String toReturn = getInitials();
-        toReturn += ", " + title;
+        toReturn += ", " + getTitle();
         toReturn += "(";
         if(DEBUG){
             if(onLoan){
@@ -112,13 +153,12 @@ class Book{
         }
         toReturn += ")";
         return toReturn;
+<<<<<<< HEAD
+
+=======
+        
+>>>>>>> book
     }
-
-
-
-
-
-
 
 }
 
@@ -159,14 +199,22 @@ class Library{
 
     /**
      * Method name: addBook
+<<<<<<< HEAD
+     * @param   Book
+     * @return (void) adds books to the array
+     */
+    public void addBook(Book toAdd){
+        if(bookCount <= MAX_BOOKS){
+=======
      * @param   String title of the book
      * @param   String author's first name
      * @param   String author's last name
      * @return (void) adds books to the array
      */
-    public void addBook(String title, String firstName, String lastName){
+    public void addBook(String lastName, String firstName, String title){
         if(bookCount <= MAX_BOOKS){
             Book toAdd = new Book(title, firstName, lastName);
+>>>>>>> book
             bookShelf[bookCount] = toAdd;
             bookCount++;
         } else {
@@ -175,6 +223,65 @@ class Library{
             return;
         }
     }
+
+
+    /**
+     * Method name: listByAuthor
+     * @param   String 
+<<<<<<< HEAD
+     * @return (String) list containing all the books by the author with te same last name
+     */
+    public String listByAuthor(String authorLastName){
+        String toReturn = "Books by " + authorLastName + ":\n";
+        for (Book book : bookShelf) {
+            boolean match = authorLastName.equals(book.getAuthorLastName()); 
+            if(match){
+                toReturn += book.toString() + "\n";
+            }
+        }
+        return toReturn;
+        
+    }
+
+    /**
+     * Method name: listByTitle
+     * @param   String 
+     * @return (String) lsit contailed all the books with matching name in the param
+     */
+    public String listByTitle(String bookTitle){
+        String toReturn = "Books named " + bookTitle + ":\n";
+        for (Book book : bookShelf) {
+            boolean match = bookTitle.equals(book.getTitle()); 
+            if(match){
+                toReturn += book.toString() + "\n";
+            }
+        }
+        return toReturn;
+        
+    }
+
+
+    /**
+     * Method name: loadBook
+     * @param String last naem of the author
+     * @param String first name of the author
+     * @param String title of the book
+     * @return (boolean) true if the book is avalable on loan;
+     *                   fasle if not
+     */
+    public boolean loanBook(){
+        
+    }
+=======
+     * @return (void) 
+     */
+    public String listByAuthor(String firstName, String lastName){
+        String toReturn = "";
+        
+        return toReturn;
+        
+    }
+>>>>>>> book
 }
 
 //==============================================================================================
