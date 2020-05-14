@@ -64,6 +64,7 @@ class Book{
 
 
     /**
+
      * Method name: getStatus
      * @param void
      * @return (boolean) the onLoad variable
@@ -153,11 +154,7 @@ class Book{
         }
         toReturn += ")";
         return toReturn;
-<<<<<<< HEAD
 
-=======
-        
->>>>>>> book
     }
 
 }
@@ -199,22 +196,11 @@ class Library{
 
     /**
      * Method name: addBook
-<<<<<<< HEAD
      * @param   Book
      * @return (void) adds books to the array
      */
     public void addBook(Book toAdd){
         if(bookCount <= MAX_BOOKS){
-=======
-     * @param   String title of the book
-     * @param   String author's first name
-     * @param   String author's last name
-     * @return (void) adds books to the array
-     */
-    public void addBook(String lastName, String firstName, String title){
-        if(bookCount <= MAX_BOOKS){
-            Book toAdd = new Book(title, firstName, lastName);
->>>>>>> book
             bookShelf[bookCount] = toAdd;
             bookCount++;
         } else {
@@ -228,7 +214,6 @@ class Library{
     /**
      * Method name: listByAuthor
      * @param   String 
-<<<<<<< HEAD
      * @return (String) list containing all the books by the author with te same last name
      */
     public String listByAuthor(String authorLastName){
@@ -272,7 +257,7 @@ class Library{
     public boolean loanBook(){
         
     }
-=======
+
      * @return (void) 
      */
     public String listByAuthor(String firstName, String lastName){
@@ -281,7 +266,7 @@ class Library{
         return toReturn;
         
     }
->>>>>>> book
+
 }
 
 //==============================================================================================
