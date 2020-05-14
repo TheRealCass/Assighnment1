@@ -53,10 +53,10 @@ class Book{
      * constructor
      * @param firstParam
      */
-    public Book(String title, String FirstName, String lastName){
+    public Book(String lastName, String firstName, String title){
 
         this.title = title;
-        authorFirstName = FirstName;
+        authorFirstName = firstName;
         authorLastName = lastName;
         onLoan = false;
 
