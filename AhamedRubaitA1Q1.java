@@ -1,3 +1,4 @@
+//==============================================================================================
 /**
  * Class Name: AhamedShoumikA1Q1
  * 
@@ -6,7 +7,7 @@
  * @author   Rubait Ul Ahamed, 007876180
  * @version (13th May 2020)
  * 
- * methods:
+ * methods: main
  * Description:
  */
 public class AhamedRubaitA1Q1 {
@@ -44,16 +45,18 @@ class Book{
     private String authorFirstName;
     private String authorLastName;
 
-    boolean onLoan;
+    private boolean onLoan;
+
+    private final boolean DEBUG = true;
 
     /**
      * constructor
      * @param firstParam
      */
-    public Book(String title, String FirstName, String lastName){
+    public Book(String lastName, String firstName, String title){
 
         this.title = title;
-        authorFirstName = FirstName;
+        authorFirstName = firstName;
         authorLastName = lastName;
         onLoan = false;
 
@@ -63,12 +66,12 @@ class Book{
      * Method name: getInitials
      * @param void
      * @return (String) the initial of the author
-     *          Ex- Gaimen, N. (for Neil Gaimen)
+     *          Ex- Gaimen, Neil
      */
     public String getInitials(){
         String toReturn = "";
-        toReturn = authorLastName + ", ";
-        toReturn += authorFirstName.charAt(0) + ".";
+        toReturn += authorLastName;
+        toReturn += ", " + authorFirstName;
         return toReturn;
     }
 
@@ -94,17 +97,18 @@ class Book{
      * Method Name: toString
      * @param void
      * @return (String) returns the title, authors initals and weather it's on loan or not
-     *                  Ex- "American Gods" - Gaimen, N. (inLibrary/onLoan)
+     *                  Ex- "American Gods" - Gaimen, Neil(inLibrary/onLoan)
      */
     public String toString(){
-        String toReturn = "";
-        toReturn += "\'" + title + "\'";
-        toReturn += " - " + getInitials();
+        String toReturn = getInitials();
+        toReturn += ", " + title;
         toReturn += "(";
-        if(onLoan){
-            toReturn += "on loan";
-        } else {
-            toReturn += "inLibrary";
+        if(DEBUG){
+            if(onLoan){
+                toReturn += "onLoan";
+            } else {
+                toReturn += "inLibrary";
+            }
         }
         toReturn += ")";
         return toReturn;
@@ -131,20 +135,11 @@ class Book{
  * 
  * methods:
  * Description:
+ * Limitations: Library can only hold MAX_BOOKS ammount. This can be set with respect to each systems config
  */
 class Library{
 
-    
-
-    /**
-     * constructor for Library
-     * @param void
-     */
-    public Library(){
-
-    }
-
-
-
-
+   
 }
+
+//==============================================================================================
