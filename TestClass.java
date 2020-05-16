@@ -4,9 +4,17 @@ public class TestClass {
     
     public static void main(String[] args) {
 
-        libClass();
+        Book a = new Book("Gaimen", "Neil", "American");
+        Book b = new Book("Martin", "Gorge", "Game Of Thrones");
+        Book c = new Book("Rolling", "J.K.", "Harry Potter");
+        Book d = new Book("Tolkin", "J.R.R.", "Lord of the rings");
+
+
+
+
+        //libClass();
         //stringStuff();
-        bookClass();
+        //bookClass();
         
     }
 
@@ -34,7 +42,7 @@ public class TestClass {
     private static void libClass(){
         Library fortRichmondLibrary = new Library();
         fortRichmondLibrary.addBook(new Book("Martin", "Gorge", "Game of Thrones"));
-        
+
     }
     
 }
