@@ -254,7 +254,7 @@ class Library{
      * @param String last name of the author
      * @param String first name of the author
      * @param String title of the book
-     * @return (boolean) true if the book is avalable on loan;
+     * @return (boolean) true if the book is avalable on loan. Turns onLoan flag to true;
      *                   fasle if not
      */
     public boolean loanBook(String lastName, String firstName, String title){
@@ -270,9 +270,12 @@ class Library{
     }
 
     /**
-     * Method name: retuenBook
-     * @param
-     * @return ()
+     * Method name: returnBook
+     * @param String last name of the author
+     * @param String first name of the author
+     * @param String title of the book
+     * @return (boolean) true if the book was found. Also changes the onLoan flag ito false
+     *                   fasle if not found.
      */
     public boolean returnBook(String lastName, String firstName, String title){
         boolean toReturn = false;
@@ -285,12 +288,14 @@ class Library{
             }
         }
         return toReturn;
-
-
-        return false;
     }
 
     /**
+     * Method name: matchBook
+     * @param String last name of the author
+     * @param String first name of the author
+     * @param String title of the book
+     * @return (Book) book if found. if not found, null book returned
      * 
      */
     private Book matchBook(String lastName, String firstName, String title){
@@ -315,7 +320,9 @@ class Library{
     }
 
     /**
-     * 
+     * Method name: toString
+     * @param void
+     * @return (String) return authour's title and name
      */
     public String toString(){
         String toReturn = "";
