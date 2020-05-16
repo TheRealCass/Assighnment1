@@ -6,23 +6,23 @@ public class TestClass {
 
         libClass();
         //stringStuff();
-        //bookClass();
+        bookClass();
         
     }
 
     private static void bookClass(){
-        Book myFavBook = new Book("Game of Thrones", "Gorge", "Martin");
-        System.out.println(myFavBook.toString());
-        myFavBook.giveOnLoan();
-        System.out.println(myFavBook.toString());
+        Book myFavBook = new Book("Martin", "Gorge", "Game of Thrones");
+
+        String s = myFavBook.getInitials();
+        System.out.println(s);
         myFavBook.recieveBook();
         System.out.println(myFavBook.toString());
 
 
-        String h = "boobs";
-        String p = "boobS";
-        boolean result = h.equals(p);
-        System.out.print(result);
+        // String h = "boobs";
+        // String p = "boobS";
+        // boolean result = h.equals(p);
+        // System.out.print(result);
     }
 
     private static void stringStuff(){
@@ -33,7 +33,8 @@ public class TestClass {
 
     private static void libClass(){
         Library fortRichmondLibrary = new Library();
-        fortRichmondLibrary.a
+        fortRichmondLibrary.addBook(new Book("Martin", "Gorge", "Game of Thrones"));
+        
     }
     
 }

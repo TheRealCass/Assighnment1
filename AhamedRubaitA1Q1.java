@@ -203,6 +203,9 @@ class Library{
         if(bookCount <= MAX_BOOKS){
             bookShelf[bookCount] = toAdd;
             bookCount++;
+            if (DEBUG){
+                System.out.println(toAdd.getTitle() + " added.");
+            }
         } else {
             if (DEBUG)
                 System.out.println("Can not add book to library. Not enough space in  program memory.");
@@ -248,25 +251,79 @@ class Library{
 
     /**
      * Method name: loadBook
-     * @param String last naem of the author
+     * @param String last name of the author
      * @param String first name of the author
      * @param String title of the book
      * @return (boolean) true if the book is avalable on loan;
      *                   fasle if not
      */
-    public boolean loanBook(){
-        
+    public boolean loanBook(String lastName, String firstName, String title){
+        Book match = matchBook(lastName, firstName, title);
+        if(match != null){
+            boolean notAvalable = match.getStatus();
+            if(!notAvalable){
+                match.giveOnLoan();
+                return true;
+            }
+        }
+        return false;
     }
 
-     * @return (void) 
+    /**
+     * Method name: retuenBook
+     * @param
+     * @return ()
      */
-    public String listByAuthor(String firstName, String lastName){
-        String toReturn = "";
-        
+    public boolean returnBook(String lastName, String firstName, String title){
+        boolean toReturn = false;
+        Book match = matchBook(lastName, firstName, title);
+        if(match != null){
+            boolean notAvalable = match.getStatus();
+            if(notAvalable){
+                match.recieveBook();
+                toReturn = true;
+            }
+        }
         return toReturn;
-        
+
+
+        return false;
     }
 
+    /**
+     * 
+     */
+    private Book matchBook(String lastName, String firstName, String title){
+        Book toReturn = null;
+        String temp = lastName + ", " + firstName;
+        boolean nameMatch = false;
+        boolean titleMatch = false;
+        for (Book inHouseBook : bookShelf) {
+            boolean match = temp.equals(inHouseBook.getInitials());
+            if(match){
+                nameMatch = true;
+                match = title.equals(inHouseBook.getTitle());
+                if(match){
+                    titleMatch = true;
+                }
+            }
+            if(nameMatch && titleMatch){
+                return inHouseBook;
+            }
+        }
+        return toReturn;
+    }
+
+    /**
+     * 
+     */
+    public String toString(){
+        String toReturn = "";
+        for (Book inHouseBook : bookShelf) {
+            toReturn += inHouseBook.toString() + "\n";
+        }
+        return toReturn;
+    }
 }
 
 //==============================================================================================
