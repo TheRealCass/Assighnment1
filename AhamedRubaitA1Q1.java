@@ -196,7 +196,7 @@ class Library{
 
     /**
      * Method name: addBook
-     * @param   Book
+     * @param   toAdd object of type book
      * @return (void) adds books to the array
      */
     public void addBook(Book toAdd){
@@ -216,7 +216,7 @@ class Library{
 
     /**
      * Method name: listByAuthor
-     * @param   String 
+     * @param   authorLastName the last name of the author as a String 
      * @return (String) list containing all the books by the author with te same last name
      */
     public String listByAuthor(String authorLastName){
@@ -225,6 +225,9 @@ class Library{
             boolean match = authorLastName.equals(book.getAuthorLastName()); 
             if(match){
                 toReturn += book.toString() + "\n";
+            } else {
+                if(DEBUG)
+                    System.out.println("No books found by " + authorLastName);
             }
         }
         return toReturn;
@@ -233,15 +236,18 @@ class Library{
 
     /**
      * Method name: listByTitle
-     * @param   String 
+     * @param bookTitle title of the book as a String
      * @return (String) lsit contailed all the books with matching name in the param
      */
     public String listByTitle(String bookTitle){
         String toReturn = "Books named " + bookTitle + ":\n";
-        for (Book book : bookShelf) {
-            boolean match = bookTitle.equals(book.getTitle()); 
+        for (Book inHouseBook : bookShelf) {
+            boolean match = bookTitle.equals(inHouseBook.getTitle()); 
             if(match){
-                toReturn += book.toString() + "\n";
+                toReturn += inHouseBook.toString() + "\n";
+            } else {
+                if(DEBUG)
+                    System.out.println("No books found by " + bookTitle);
             }
         }
         return toReturn;
@@ -251,9 +257,9 @@ class Library{
 
     /**
      * Method name: loadBook
-     * @param String last name of the author
-     * @param String first name of the author
-     * @param String title of the book
+     * @param lastName last name of the author
+     * @param firstName first name of the author
+     * @param title title of the book
      * @return (boolean) true if the book is avalable on loan. Turns onLoan flag to true;
      *                   fasle if not
      */
@@ -264,6 +270,9 @@ class Library{
             if(!notAvalable){
                 match.giveOnLoan();
                 return true;
+            } else {
+                if(DEBUG)
+                    System.out.println(title + " is already out for loan.");
             }
         }
         return false;
@@ -271,9 +280,9 @@ class Library{
 
     /**
      * Method name: returnBook
-     * @param String last name of the author
-     * @param String first name of the author
-     * @param String title of the book
+     * @param lastName last name of the author
+     * @param firstName first name of the author
+     * @param title title of the book
      * @return (boolean) true if the book was found. Also changes the onLoan flag ito false
      *                   fasle if not found.
      */
@@ -292,24 +301,28 @@ class Library{
 
     /**
      * Method name: matchBook
-     * @param String last name of the author
-     * @param String first name of the author
-     * @param String title of the book
+     * @param lastName last name of the author
+     * @param firstName first name of the author
+     * @param title title of the book
      * @return (Book) book if found. if not found, null book returned
      * 
      */
     private Book matchBook(String lastName, String firstName, String title){
         Book toReturn = null;
-        String temp = lastName + ", " + firstName;
+        String name = lastName + ", " + firstName;
         boolean nameMatch = false;
         boolean titleMatch = false;
         for (Book inHouseBook : bookShelf) {
-            boolean match = temp.equals(inHouseBook.getInitials());
+            boolean match = name.equals(inHouseBook.getInitials());
             if(match){
                 nameMatch = true;
+                if(DEBUG)
+                    System.out.println("book by " + name + "found");
                 match = title.equals(inHouseBook.getTitle());
                 if(match){
                     titleMatch = true;
+                    if(DEBUG)
+                        System.out.println("book named " + title + " found");
                 }
             }
             if(nameMatch && titleMatch){
