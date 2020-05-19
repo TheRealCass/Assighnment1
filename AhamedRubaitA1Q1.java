@@ -26,24 +26,24 @@ public class AhamedRubaitA1Q1 {
     public static void main(String[] args) throws IOException{
 
         Library bookHouse = new Library();
-        handleInput("Input.txt");
+        handleInput("Input.txt", bookHouse);
 
 
        
         
     }
 
-    private static void handleInput(String path) throws IOException {
+    public static void handleInput(String path, Library lib) throws IOException {
         File f = new File(path);
         Scanner scan = new Scanner(f);
         while (scan.hasNextLine()){
             String command = scan.nextLine();
-            executeCommand(command);
+            executeCommand(command, lib);
        }
        scan.close();
     }
 
-    private static void executeCommand(String command){
+    public static void executeCommand(String command, Library lib){
         Scanner scan = new Scanner(command);
         String instruction = "";
         String lastName = "";
@@ -68,6 +68,36 @@ public class AhamedRubaitA1Q1 {
                 System.out.println(title);
             }
         }
+
+        if (instruction.equals("ADD")) {
+            add(lib, lastName, firstName, title);
+        } else if (instruction.equals("SEARCHA")){
+            searchByAuthour(lib, lastName);
+        } else if (instruction.equals("SEARCHT")) {
+            searchByTitle(lib, title);
+        } else if (instruction.equals("GETBOOK")) {
+            borrowBookFromLib(lib, lastName, firstName, title);
+        }
+    }
+
+    public static void add (Library lib, String lastName, String firstName, String title){
+        Book temp = new Book(lastName, firstName, title);
+        lib.addBook(temp);
+    }
+
+    public static void searchByTitle (Library lib, String lastName){
+        lib.listByAuthor(lastName);
+        //formating & printingg needed
+    }
+    
+    public static void searchByAuthour (Library lib, String title){
+        lib.listByTitle(title);
+        //formating & printingg needed
+    }
+
+    public static void borrowBookFromLib (Library lib, String lastName, String firstName, String title) {
+        lib.loanBook(lastName, firstName, title);
+        //formating & printingg needed
     }
 }
 
