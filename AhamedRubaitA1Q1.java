@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.IOException;
+import java.util.Scanner;
+
 //==============================================================================================
 /**
  * Class Name: AhamedShoumikA1Q1
@@ -5,7 +9,7 @@
  * COMP2140 Section D01
  * Assighnment  Assightnment #1, Question #1
  * @author   Rubait Ul Ahamed, 007876180
- * @version (13th May 2020)
+ * @version (19th May 2020)
  * 
  * methods: main
  * Description:
@@ -17,10 +21,38 @@ public class AhamedRubaitA1Q1 {
      * @param Strings[]
      * @return void
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException{
+
+        Library bookHouse = new Library();
+        handleInput("Input.txt");
+
+
+       
         
     }
-    
+
+    private static void handleInput(String path){
+        Scanner scan = new Scanner(new File(path));
+        String command = "";
+        try{
+            while (scan.hasNextLine()) {
+                command = scan.nextLine();
+                executeCommand(command);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            scan.close();
+        }
+    }
+
+    private static void executeCommand(String command) throws IOException{
+        Scanner scan = new Scanner(command);
+        String operation = scan.next();
+        if(operation.equals("ADD")){
+            String lastName = scan.next();
+        }
+    }
 }
 
 
@@ -33,7 +65,7 @@ public class AhamedRubaitA1Q1 {
  * COMP2140 Section D01
  * Assighnment  Assightnment #1, Question #1
  * @author   Rubait Ul Ahamed, 007876180
- * @version (13th May 2020)
+ * @version (15th May 2020)
  * 
  * methods: getInitials, giveOnLoan, RecieveBook
  * Description:
@@ -168,7 +200,7 @@ class Book{
  * COMP2140 Section D01
  * Assighnment  Assightnment #1, Question #1
  * @author   Rubait Ul Ahamed, 007876180
- * @version (13th May 2020)
+ * @version (18th May 2020)
  * 
  * methods:
  * Description:
