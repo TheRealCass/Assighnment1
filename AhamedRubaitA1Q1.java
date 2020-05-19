@@ -1,18 +1,16 @@
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.Scanner;
 
 //==============================================================================================
 /**
  * Class Name: AhamedShoumikA1Q1
  * 
- * COMP2140 Section D01
- * Assighnment  Assightnment #1, Question #1
- * @author   Rubait Ul Ahamed, 007876180
+ * COMP2140 Section D01 Assighnment Assightnment #1, Question #1
+ * 
+ * @author Rubait Ul Ahamed, 007876180
  * @version (19th May 2020)
  * 
- * methods: main
- * Description:
+ *          methods: main Description:
  */
 public class AhamedRubaitA1Q1 {
 
@@ -20,27 +18,35 @@ public class AhamedRubaitA1Q1 {
 
     /**
      * name: main function
+     * 
      * @param Strings[]
      * @return void
      */
-    public static void main(String[] args) throws IOException{
-
+    public static void main(String[] args) {
         Library bookHouse = new Library();
-        handleInput("Input.txt", bookHouse);
-
-
-       
-        
+        try {
+            handleInput("Input.txt", bookHouse);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            System.out.println(bookHouse.toString());
+        }
     }
 
-    public static void handleInput(String path, Library lib) throws IOException {
+    public static void handleInput(String path, Library lib) {
         File f = new File(path);
-        Scanner scan = new Scanner(f);
-        while (scan.hasNextLine()){
-            String command = scan.nextLine();
-            executeCommand(command, lib);
-       }
-       scan.close();
+        try {
+            Scanner scan = new Scanner(f);
+            while (scan.hasNextLine()){
+                String command = scan.nextLine();
+                executeCommand(command, lib);
+            }
+            scan.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        
+       
     }
 
     public static void executeCommand(String command, Library lib){
@@ -415,6 +421,7 @@ class Library{
      * @param void
      * @return (String) return authour's title and name
      */
+    @Override
     public String toString(){
         String toReturn = "";
         for (Book inHouseBook : bookShelf) {
