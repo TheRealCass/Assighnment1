@@ -16,6 +16,8 @@ import java.util.Scanner;
  */
 public class AhamedRubaitA1Q1 {
 
+    private static final boolean DEBUG = true;
+
     /**
      * name: main function
      * @param Strings[]
@@ -31,26 +33,40 @@ public class AhamedRubaitA1Q1 {
         
     }
 
-    private static void handleInput(String path){
-        Scanner scan = new Scanner(new File(path));
-        String command = "";
-        try{
-            while (scan.hasNextLine()) {
-                command = scan.nextLine();
-                executeCommand(command);
+    private static void handleInput(String path) throws IOException {
+        File f = new File(path);
+        Scanner scan = new Scanner(f);
+        while (scan.hasNextLine()){
+            String command = scan.nextLine();
+            executeCommand(command);
+       }
+       scan.close();
+    }
+
+    private static void executeCommand(String command){
+        Scanner scan = new Scanner(command);
+        String instruction = "";
+        String lastName = "";
+        String firstName = "";
+        String title = "";
+        try {
+            instruction = scan.next();
+            lastName = scan.next();
+            lastName = lastName.substring(0, lastName.length() - 1);
+            firstName = scan.next();
+            firstName = firstName.substring(0, lastName.length() - 1);
+            while (scan.hasNext()){
+                title += scan.next() + " ";
             }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             scan.close();
-        }
-    }
-
-    private static void executeCommand(String command) throws IOException{
-        Scanner scan = new Scanner(command);
-        String operation = scan.next();
-        if(operation.equals("ADD")){
-            String lastName = scan.next();
+            if (DEBUG){
+                System.out.println(instruction);
+                System.out.println(lastName + "\n" + firstName);
+                System.out.println(title);
+            }
         }
     }
 }
