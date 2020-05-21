@@ -93,7 +93,6 @@ public class AhamedRubaitA1Q1 {
         } else if (instruction.equals("SEARCHA")){
             try {
                 lastName = scan.next();
-                lastName = lastName.substring(0, lastName.length() - 1);
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
@@ -166,8 +165,12 @@ public class AhamedRubaitA1Q1 {
 
     public static void returnBookToLib (Library lib, String lastName, String firstName, String title) {
         boolean result = lib.returnBook(lastName, firstName, title);
-        if(DEBUG)
-            System.out.println(result);
+        if(DEBUG && result){
+            String msg = title + " by " + lastName + ", " + firstName;
+           System.out.println(msg + "returned");
+        } else {
+            System.out.println("Book does not belong to this library");
+        } 
     }
 
 

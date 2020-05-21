@@ -97,6 +97,8 @@ public class Book{
      */
     public void giveOnLoan(){
         onLoan = true;
+        if(DEBUG)
+            System.out.println("book given on loan");
     }
 
     /**
@@ -106,6 +108,8 @@ public class Book{
      */
     public void recieveBook(){
         onLoan = false;
+        if(DEBUG)
+            System.out.println("book taken back sucessfully");
     }
 
     /**

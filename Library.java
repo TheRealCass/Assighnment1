@@ -76,13 +76,10 @@ public class Library{
      */
     public String listByTitle(String bookTitle){
         String toReturn = "Books named " + bookTitle + ":\n";
-        for (Book inHouseBook : bookShelf) {
-            boolean match = bookTitle.equals(inHouseBook.getTitle()); 
+        for (int i = 0; i < getBookCount(); i++) {
+            boolean match = bookTitle.equals(bookShelf[i].getTitle()); 
             if(match){
-                toReturn += inHouseBook.toString() + "\n";
-            } else {
-                if(DEBUG)
-                    System.out.println("No books found by " + bookTitle);
+                toReturn += bookShelf[i].toString() + "\n";
             }
         }
         return toReturn;
@@ -143,28 +140,42 @@ public class Library{
      * 
      */
     private Book matchBook(String lastName, String firstName, String title){
-        Book toReturn = null;
+        String debug = "finding " + title + " by ";
         String name = lastName + ", " + firstName;
+        debug += name;
+
+        if(DEBUG){
+            System.out.println(debug);
+        }
+
+        boolean nameCondition =false;
+        boolean titleCondition = false;
         boolean nameMatch = false;
         boolean titleMatch = false;
-        for (Book inHouseBook : bookShelf) {
-            boolean match = name.equals(inHouseBook.getInitials());
-            if(match){
-                nameMatch = true;
-                if(DEBUG)
-                    System.out.println("book by " + name + "found");
-                match = title.equals(inHouseBook.getTitle());
-                if(match){
-                    titleMatch = true;
-                    if(DEBUG)
-                        System.out.println("book named " + title + " found");
+
+        for (int i = 0; i < getBookCount(); i++) {
+            nameCondition = name.equals(bookShelf[i].getInitials());
+            titleCondition = title.equals(bookShelf[i].getTitle());
+
+            if (titleCondition) {
+                titleMatch = true;
+
+                if (nameCondition) {
+                    nameMatch = true;
                 }
+
             }
+
             if(nameMatch && titleMatch){
-                return inHouseBook;
+                if(DEBUG)
+                    System.out.println("book found");
+                return bookShelf[i];
             }
+        
         }
-        return toReturn;
+        if(DEBUG)
+            System.out.println(title + " by " + name + "not found");
+        return null;
     }
 
     /**
@@ -174,9 +185,9 @@ public class Library{
      */
     @Override
     public String toString(){
-        String toReturn = "";
-        for (Book inHouseBook : bookShelf) {
-            toReturn += inHouseBook.toString() + "\n";
+        String toReturn = "Books in " + this.getClass().getName() + "\n";
+        for (int i = 0; i < getBookCount(); i++) {
+            toReturn += bookShelf[i].toString() + "\n";
         }
         return toReturn;
     }
