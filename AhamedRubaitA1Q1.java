@@ -1,6 +1,5 @@
 import java.io.*;
 import java.util.Scanner;
-
 //==============================================================================================
 /**
  * Class Name: AhamedShoumikA1Q1
@@ -16,6 +15,8 @@ public class AhamedRubaitA1Q1 {
 
     private static final boolean DEBUG = true;
 
+    private final static String PATH = "Input.txt";
+
     /**
      * name: main function
      * 
@@ -25,11 +26,15 @@ public class AhamedRubaitA1Q1 {
     public static void main(String[] args) {
         Library bookHouse = new Library();
         try {
-            handleInput("Input.txt", bookHouse);
+            handleInput(PATH, bookHouse);
         } catch (Exception e) {
             e.printStackTrace();
+            if(DEBUG)
+                System.out.println("can't acess " + PATH);
         } finally {
-            System.out.println(bookHouse.toString());
+            System.out.println("program terminated normally.");
+            if(DEBUG)
+                System.out.println(bookHouse.toString());
         }
     }
 
@@ -50,38 +55,90 @@ public class AhamedRubaitA1Q1 {
     }
 
     public static void executeCommand(String command, Library lib){
-        Scanner scan = new Scanner(command);
+        Scanner scan = null;
         String instruction = "";
         String lastName = "";
         String firstName = "";
         String title = "";
+
         try {
+            scan = new Scanner(command);
             instruction = scan.next();
-            lastName = scan.next();
-            lastName = lastName.substring(0, lastName.length() - 1);
-            firstName = scan.next();
-            firstName = firstName.substring(0, lastName.length() - 1);
-            while (scan.hasNext()){
-                title += scan.next() + " ";
-            }
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            scan.close();
-            if (DEBUG){
-                System.out.println(instruction);
-                System.out.println(lastName + "\n" + firstName);
-                System.out.println(title);
-            }
         }
 
         if (instruction.equals("ADD")) {
+         
+            try {
+                lastName = scan.next();
+                lastName = lastName.substring(0, lastName.length() - 1);
+                firstName = scan.next();
+                firstName = firstName.substring(0, firstName.length() - 1);
+                while (scan.hasNext()){
+                    title += scan.next() + " ";
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                scan.close();
+                if (DEBUG){
+                    System.out.println(instruction);
+                    System.out.println(lastName);
+                    System.out.println(firstName);
+                    System.out.println(title);
+                }
+            }
             add(lib, lastName, firstName, title);
         } else if (instruction.equals("SEARCHA")){
+            try {
+                lastName = scan.next();
+                lastName = lastName.substring(0, lastName.length() - 1);
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                scan.close();
+                if (DEBUG){
+                    System.out.println(instruction);
+                    System.out.println(lastName);
+                }
+            }
             searchByAuthour(lib, lastName);
         } else if (instruction.equals("SEARCHT")) {
+            try {
+                while (scan.hasNext()){
+                    title += scan.next() + " ";
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                scan.close();
+                if (DEBUG){
+                    System.out.println(instruction);
+                    System.out.println(title);
+                }
+            }
             searchByTitle(lib, title);
         } else if (instruction.equals("GETBOOK")) {
+            try {
+                lastName = scan.next();
+                lastName = lastName.substring(0, lastName.length() - 1);
+                firstName = scan.next();
+                firstName = firstName.substring(0, firstName.length() - 1);
+                while (scan.hasNext()){
+                    title += scan.next() + " ";
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                scan.close();
+                if (DEBUG){
+                    System.out.println(instruction);
+                    System.out.println(lastName);
+                    System.out.println(firstName);
+                    System.out.println(title);
+                }
+            }
             borrowBookFromLib(lib, lastName, firstName, title);
         }
     }
@@ -91,13 +148,15 @@ public class AhamedRubaitA1Q1 {
         lib.addBook(temp);
     }
 
-    public static void searchByTitle (Library lib, String lastName){
-        lib.listByAuthor(lastName);
+    public static void searchByAuthour (Library lib, String lastName){
+        String s = lib.listByAuthor(lastName);
+        System.out.print(s);
         //formating & printingg needed
     }
     
-    public static void searchByAuthour (Library lib, String title){
-        lib.listByTitle(title);
+    public static void searchByTitle (Library lib, String title){
+        String s = lib.listByTitle(title);
+        System.out.print(s);
         //formating & printingg needed
     }
 
@@ -225,6 +284,7 @@ class Book{
      * @return (String) returns the title, authors initals and weather it's on loan or not
      *                  Ex- "American Gods" - Gaimen, Neil(inLibrary/onLoan)
      */
+    @Override
     public String toString(){
         String toReturn = getInitials();
         toReturn += ", " + getTitle();
@@ -288,7 +348,7 @@ class Library{
             bookShelf[bookCount] = toAdd;
             bookCount++;
             if (DEBUG){
-                System.out.println(toAdd.getTitle() + " added.");
+                System.out.println(toAdd.getTitle() + " by " + toAdd.getInitials() + " added.");
             }
         } else {
             if (DEBUG)
@@ -305,13 +365,10 @@ class Library{
      */
     public String listByAuthor(String authorLastName){
         String toReturn = "Books by " + authorLastName + ":\n";
-        for (Book book : bookShelf) {
-            boolean match = authorLastName.equals(book.getAuthorLastName()); 
+        for(int i = 0; i < getBookCount(); i++) {
+            boolean match = authorLastName.equals(bookShelf[i].getAuthorLastName()); 
             if(match){
-                toReturn += book.toString() + "\n";
-            } else {
-                if(DEBUG)
-                    System.out.println("No books found by " + authorLastName);
+                toReturn = bookShelf[i].toString();
             }
         }
         return toReturn;
@@ -428,6 +485,15 @@ class Library{
             toReturn += inHouseBook.toString() + "\n";
         }
         return toReturn;
+    }
+
+    /**
+     * Method name: getBookCount
+     * @param void
+     * @return (int) amount of books in the bookshelf array
+     */
+    public int getBookCount(){
+        return bookCount;
     }
 }
 
