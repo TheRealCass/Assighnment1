@@ -1,6 +1,8 @@
-import java.io.File;
-import java.io.FileNotFoundException;
+//==============================================================================================
+//importing scanner and its requirments
 import java.util.Scanner;
+import java.io.File; 
+import java.io.FileNotFoundException;
 //==============================================================================================
 /**
  * Class Name: AhamedShoumikA1Q1
@@ -9,21 +11,31 @@ import java.util.Scanner;
  * COMP2140 Section D01 Assighnment Assightnment #1, Question #1
  * 
  * @author Rubait Ul Ahamed, 007876180
- * @version (19th May 2020)
+ * @version (20th May 2020)
  */
 
 public class AhamedRubaitA1Q1 {
 
+    //path to input file
+    private final static String PATH = "Input.txt";
+
+    //commands
+    private final static String ADD_COMMAND = "ADD";
+    private final static String SEARCH_BY_TITLE_COMMAND = "SEARCHT";
+    private final static String SEARCH_BY_AUTHOR_COMMAND = "SEARCHA";
+    private final static String BORROW_BOOK_COMMAND = "GETBOOK";
+    private final static String RETURN_BOOK_COMMAND = "RETURNBOOK";
+
+    //debug
     private static final boolean DEBUG = false;
 
-    private final static String PATH = "Input.txt";
 
     /**
      * name: main function
      * 
      * @param Strings[]
      * @return void
-     */
+    */
     public static void main(String[] args) {
         Library bookHouse = new Library();
         try {
@@ -40,6 +52,13 @@ public class AhamedRubaitA1Q1 {
             System.out.println(bookHouse.toString());
     }
 
+
+    /**
+     * Method name: handleInput
+     * @param path path location as a String to the input file
+     * @param lib library to execute the commands from the input file
+     * @return (void) takes command from the input file to execute on library obj
+     */
     public static void handleInput(String path, Library lib) {
         File f = new File(path);
         try {
@@ -56,6 +75,14 @@ public class AhamedRubaitA1Q1 {
        
     }
 
+
+    /**
+     * Method Name: executeCommand
+     * @param command line of command to execute
+     * @param lib lib to execute command on
+     * @return (void) taken in and executes one line of command on lib.
+     *                Command ex: ADD Gaimen, Neil, American Gods
+     */
     public static void executeCommand(String command, Library lib){
         Scanner scan = null;
         String instruction = "";
@@ -70,7 +97,7 @@ public class AhamedRubaitA1Q1 {
             e.printStackTrace();
         }
 
-        if (instruction.equals("ADD")) {
+        if (instruction.equals(ADD_COMMAND)) {
          
             try {
                 lastName = scan.next();
@@ -92,7 +119,7 @@ public class AhamedRubaitA1Q1 {
                 }
             }
             add(lib, lastName, firstName, title);
-        } else if (instruction.equals("SEARCHA")){
+        } else if (instruction.equals(SEARCH_BY_AUTHOR_COMMAND)){
             try {
                 lastName = scan.next();
             } catch (Exception e) {
@@ -105,7 +132,7 @@ public class AhamedRubaitA1Q1 {
                 }
             }
             searchByAuthour(lib, lastName);
-        } else if (instruction.equals("SEARCHT")) {
+        } else if (instruction.equals(SEARCH_BY_TITLE_COMMAND)) {
             try {
                 while (scan.hasNext()){
                     title += scan.next() + " ";
@@ -120,7 +147,7 @@ public class AhamedRubaitA1Q1 {
                 }
             }
             searchByTitle(lib, title);
-        } else if (instruction.equals("GETBOOK")) {
+        } else if (instruction.equals(BORROW_BOOK_COMMAND)) {
             try {
                 lastName = scan.next();
                 lastName = lastName.substring(0, lastName.length() - 1);
@@ -141,7 +168,7 @@ public class AhamedRubaitA1Q1 {
                 }
             }
             borrowBookFromLib(lib, lastName, firstName, title);
-        } else if (instruction.equals("RETURNBOOK")) {
+        } else if (instruction.equals(RETURN_BOOK_COMMAND)) {
             try {
                 lastName = scan.next();
                 lastName = lastName.substring(0, lastName.length() - 1);
@@ -165,6 +192,15 @@ public class AhamedRubaitA1Q1 {
         }
     }
 
+
+    /**
+     * Method name: returnBookToLib
+     * @param lib library to return book to
+     * @param lastName last name of the author
+     * @param firstName first name of the author
+     * @param title title of the author
+     * @return (void) if book part of lib, returns it to the lib
+     */
     public static void returnBookToLib (Library lib, String lastName, String firstName, String title) {
         boolean result = lib.returnBook(lastName, firstName, title);
         if(!result){
@@ -174,22 +210,53 @@ public class AhamedRubaitA1Q1 {
     }
 
 
+    /**
+     * Method name: add
+     * @param lib library to add to
+     * @param lastName last name of the author
+     * @param firstName first name of the author
+     * @param title title of the author
+     * @return (void) adds book to the library
+     */
     public static void add (Library lib, String lastName, String firstName, String title){
         Book temp = new Book(lastName, firstName, title);
         lib.addBook(temp);
     }
 
+
+    /**
+     * MEthod name: searchByAuthor
+     * @param lib library to search on
+     * @param lastName last name of to search by
+     * @return (void) searches and prins out list of matched authors
+     */
     public static void searchByAuthour (Library lib, String lastName){
         String s = lib.listByAuthor(lastName);
         System.out.print(s + "\n");
     }
     
+
+    /**
+     * Method name: searchByTitle
+     * @param lib library to search on
+     * @param title string to check for title
+     * @return (void) searches and prins out list of matched titles
+     */
     public static void searchByTitle (Library lib, String title){
         String s = lib.listByTitle(title);
         System.out.print(s + "\n");
         //formating & printingg needed
     }
 
+
+    /**
+     * Method name: borrowBookFromLib
+     * @param lib library to borrow from
+     * @param lastName last name of the author
+     * @param firstName first name of the author
+     * @param title title of the author
+     * @return (void) loans book from lib
+     */
     public static void borrowBookFromLib (Library lib, String lastName, String firstName, String title) {
         boolean result = lib.loanBook(lastName, firstName, title);
         if(!result){
@@ -198,6 +265,7 @@ public class AhamedRubaitA1Q1 {
         System.out.println("\n");
     }
 }
+
 
 //==============================================================================================
 /**
@@ -235,7 +303,6 @@ class Book{
 
 
     /**
-
      * Method name: getStatus
      * @param void
      * @return (boolean) the onLoad variable
@@ -288,6 +355,7 @@ class Book{
         return toReturn;
     }
 
+
     /**
      * Method name: giveOnLoan
      * @param void
@@ -299,6 +367,7 @@ class Book{
         System.out.println(msg);
     }
 
+
     /**
      * Method name: recieveBook
      * @param void
@@ -309,6 +378,7 @@ class Book{
         String msg ="Book returned:\n" + toString();
         System.out.println(msg);
     }
+
 
     /**
      * Method Name: toString
@@ -337,10 +407,10 @@ class Book{
 
 
 //==============================================================================================
-
 /**
  * Class Name: Library
  * 
+ * DESCRIPTION: holds data and info library to store and borrow books
  * COMP2140 Section D01
  * Assighnment  Assightnment #1, Question #1
  * @author   Rubait Ul Ahamed, 007876180
@@ -406,6 +476,7 @@ class Library{
         
     }
 
+
     /**
      * Method name: listByTitle
      * @param bookTitle title of the book as a String
@@ -447,6 +518,7 @@ class Library{
         return false;
     }
 
+
     /**
      * Method name: returnBook
      * @param lastName last name of the author
@@ -469,6 +541,7 @@ class Library{
         return toReturn;
     }
 
+
     /**
      * Method name: matchBook
      * @param lastName last name of the author
@@ -478,30 +551,28 @@ class Library{
      * 
      */
     private Book matchBook(String lastName, String firstName, String title){
-        String debug = "finding " + title + " by ";
         String name = lastName + ", " + firstName;
-        debug += name;
-
         if(DEBUG){
+            String debug = "finding " + title + " by ";
+            debug += name;
             System.out.println(debug);
         }
 
+        //creating condition variables
         boolean nameCondition =false;
         boolean titleCondition = false;
         boolean nameMatch = false;
         boolean titleMatch = false;
 
+        //innitialising condition variables
         for (int i = 0; i < getBookCount(); i++) {
             nameCondition = name.equals(bookShelf[i].getInitials());
             titleCondition = title.equals(bookShelf[i].getTitle());
-
             if (titleCondition) {
                 titleMatch = true;
-
                 if (nameCondition) {
                     nameMatch = true;
                 }
-
             }
 
             if(nameMatch && titleMatch){
@@ -511,10 +582,12 @@ class Library{
             }
         
         }
-        if(DEBUG)
-            System.out.println(title + " by " + name + "not found");
+
+        //if not found    
+        System.out.println(title + " by " + name + "not found");
         return null;
     }
+
 
     /**
      * Method name: toString
@@ -539,5 +612,4 @@ class Library{
         return bookCount;
     }
 }
-
 //==============================================================================================
