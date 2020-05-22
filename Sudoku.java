@@ -2,6 +2,7 @@
 /**
  * Class Name: Sudoku
  * 
+ * DESCRIPTION: Stores sudoku bords. has methods to solve them if called upon bord
  * COMP2140 Section D01 
  * Assighnment Assightnment #1, Question #1
  * 
@@ -9,13 +10,27 @@
  * @version (19th May 2020)
  *
  */public class Sudoku {
+
+    private static final int[][] DEFAULT_BORD = {
+        {5, 0, 9, 4, 0, 0, 8, 0, 1},
+        {0, 1, 0, 0, 6, 0, 9, 3, 0},
+        {0, 4, 8, 0, 7, 0, 2, 5, 0},
+        {9, 2, 0, 3, 0, 0, 5, 0, 7},
+        {6, 7, 1, 8, 5, 0, 0, 0, 2},
+        {0, 0, 0, 0, 0, 4, 1, 6, 0},
+        {0, 0, 6, 1, 0, 3, 0, 0, 0},
+        {7, 8, 0, 0, 9, 5, 4, 0, 0},
+        {0, 3, 0, 2, 0, 0, 0, 9, 8}
+    };
     
+    //variables to store sudoku bord
     private int[][] bord;
     public int size;
-
     private final int BLANK = 0;
 
+    //debug
     private final boolean DEBUG = false;
+
 
     /**
      * constructor
@@ -26,6 +41,19 @@
         this.bord = copyBord(toSolve);
 
     }
+
+
+    /**
+     * secoundary constructor
+     * uses the defaul pre built bord
+     */
+    public Sudoku(){
+        int [][] defaultBord = copyBord(DEFAULT_BORD);
+        this.size = defaultBord.length;
+        this.bord = defaultBord;
+
+    }
+
 
     /**
      * Method name: rowCheck
@@ -48,6 +76,7 @@
         return false;
     }
 
+
     /**
      * Method name: col Check
      * @param col the col index to check in the 2d array
@@ -64,10 +93,12 @@
                 return true;
             }
         }
+
         if(DEBUG)
             System.out.println(digit + " not found in " + col + "th col");
         return false;
     }
+
 
     /**
      * Method name: gridCheck
@@ -91,6 +122,7 @@
                 }
             }
         }
+
         if(DEBUG)
             System.out.println(digit + " not found in subGrid");
         return false;
@@ -107,6 +139,8 @@
     private boolean validateDigit(int row, int col, int digit) {
         if(DEBUG)
             System.out.println("validating " + digit);
+
+        //checking for conditions
         boolean notInRow = !rowCheck(row, digit);
         boolean notInCol = !colCheck(col, digit);
         boolean notInGrid = !gridCheck(row, col, digit);
@@ -116,6 +150,7 @@
         }
         if(DEBUG)
             System.out.println(digit + " can't be in " + row + "th row and" + col + "th col");
+
         return false;
     }
 
