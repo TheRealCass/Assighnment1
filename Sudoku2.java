@@ -8,7 +8,7 @@
  * @author Rubait Ul Ahamed, 007876180
  * @version (19th May 2020)
  *
- */public class Sudoku {
+ */public class Sudoku2 {
     
     private int[][] bord;
     public int size;
@@ -21,7 +21,7 @@
      * constructor
      * @param toSolve initial bord in form of 2d array
      */
-    public Sudoku(int[][] toSolve){
+    public Sudoku2(int[][] toSolve){
         this.size = toSolve.length;
         this.bord = copyBord(toSolve);
 
@@ -39,12 +39,12 @@
         for (int col = 0; col < size; col++) {
             if(bord[row][col] == digit){
                 if(DEBUG)
-                    System.out.println(digit + " found in " + row + "th row");
+                    System.out.println(digit + " found in" + row + "th row");
                 return true;
             }
         }
         if(DEBUG)
-            System.out.println(digit + " not found in " + row + "th row");
+            System.out.println(digit + " not found in" + row + "th row");
         return false;
     }
 
@@ -60,12 +60,12 @@
         for (int row = 0; row < size; row++) {
             if(bord[row][col] == digit){
                 if(DEBUG)
-                    System.out.println(digit + " found in " + col + "th col");
+                    System.out.println(digit + " found in" + col + "th col");
                 return true;
             }
         }
         if(DEBUG)
-            System.out.println(digit + " not found in " + col + "th col");
+            System.out.println(digit + " not found in" + col + "th col");
         return false;
     }
 
@@ -115,7 +115,7 @@
             return true;
         }
         if(DEBUG)
-            System.out.println(digit + " can't be in " + row + "th row and" + col + "th col");
+            System.out.println(digit + " can't be in" + row + "th row and" + col + "th col");
         return false;
     }
 
@@ -185,11 +185,6 @@
     }
 
 
-	/**
-	 * Method name: copyBord
-	 * @param toCopy 2D arry bord
-	 * @return (int[][]) the deep copied bord
-	 */
     private int[][] copyBord(int[][] toCopy){
         int size = toCopy.length;
         int[][] toReturn = new int[size][size];
