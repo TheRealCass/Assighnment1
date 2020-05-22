@@ -13,4 +13,4 @@ GETBOOK Shields, Carol, The Stone Diaries
 ADD Margaret, Atwood, Alias Grace
 SEARCHT Alias Grace
 RETURNBOOK Martel, Yann, Life of Pi
-SEARCHA Fitzgeral
+SEARCHA Fitzgerald

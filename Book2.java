@@ -7,11 +7,12 @@
  * Assighnment  Assightnment #1, Question #1
  * @author   Rubait Ul Ahamed, 007876180
  * @version (15th May 2020)
- * 
- * methods: getInitials, giveOnLoan, RecieveBook
- * Description:
  */
-public class Book{
+/* methods: getInitials, giveOnLoan, RecieveBook, getStatus, getTitle, getAuthorFirstName,
+            getAuthorLastName, toString
+ * Description: holds data and info for a book in a library
+ */
+public class Book2{
 
     //book info
     private String title;
@@ -20,7 +21,7 @@ public class Book{
 
     private boolean onLoan;
 
-    private final boolean DEBUG = true;
+    private final boolean DEBUG = false;
 
     /**
      * constructor
@@ -97,8 +98,8 @@ public class Book{
      */
     public void giveOnLoan(){
         onLoan = true;
-        if(DEBUG)
-            System.out.println("book given on loan");
+        String msg = "Book loaned:\n" + toString();
+        System.out.println(msg);
     }
 
     /**
@@ -108,8 +109,8 @@ public class Book{
      */
     public void recieveBook(){
         onLoan = false;
-        if(DEBUG)
-            System.out.println("book taken back sucessfully");
+        String msg ="Book returned:\n" + toString();
+        System.out.println(msg);
     }
 
     /**
@@ -122,15 +123,15 @@ public class Book{
     public String toString(){
         String toReturn = getInitials();
         toReturn += ", " + getTitle();
-        toReturn += "(";
         if(DEBUG){
-            if(onLoan){
-                toReturn += "onLoan";
-            } else {
-                toReturn += "inLibrary";
-            }
+            toReturn += "(";
+                if(onLoan){
+                    toReturn += "onLoan";
+                } else {
+                    toReturn += "inLibrary";
+                }
+            toReturn += ")";
         }
-        toReturn += ")";
         return toReturn;
 
     }

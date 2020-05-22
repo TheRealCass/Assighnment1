@@ -12,13 +12,13 @@
  * Description:
  * Limitations: Library can only hold MAX_BOOKS ammount. This can be set with respect to each systems config
  */
-public class Library{
+public class Library2{
 
     private Book[] bookShelf;
     private int bookCount;
     private final int MAX_BOOKS = 50000;
 
-    private final boolean DEBUG = true;
+    private final boolean DEBUG = false;
 
     
 
@@ -126,6 +126,7 @@ public class Library{
             if(notAvalable){
                 match.recieveBook();
                 toReturn = true;
+
             }
         }
         return toReturn;
