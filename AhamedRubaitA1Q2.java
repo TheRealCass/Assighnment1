@@ -10,4 +10,18 @@ public class AhamedRubaitA1Q2 {
         {0, 0, 0}, {0, 0, 9}, {0, 0, 0},
         {9, 2, 0}, {0, 0, 9}, {0, 0, 0}
     };
+
+    public static void main(String[] args){
+        Sudoku sudoku = new Sudoku(defaultBord);
+        System.out.print("bord to solve");
+        sudoku.display();
+
+        if(sudoku.solve()){
+            System.out.println("Solving");
+            sudoku.display();
+        } else {
+            System.out.println("Not Solvable");
+
+        }
+    }
 }
