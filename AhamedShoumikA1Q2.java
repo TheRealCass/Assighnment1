@@ -101,7 +101,7 @@ public class AhamedShoumikA1Q2 {
  * Assighnment Assightnment #1, Question #1
  * 
  * @author Rubait Ul Ahamed, 007876180
- * @version (19th May 2020)
+ * @version (22th May 2020)
  *
  */
 class Sudoku {
