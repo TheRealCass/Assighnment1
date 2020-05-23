@@ -1,31 +1,45 @@
-import java.io.*;
+//==============================================================================================
+//importing scanner and its requirments
 import java.util.Scanner;
+import java.io.File; 
+import java.io.FileNotFoundException;
 //==============================================================================================
 /**
  * Class Name: AhamedShoumikA1Q1
- * 
+ *
+ * DESCRIPTION: taken in the input file and exectutes each line of command
  * COMP2140 Section D01 Assighnment Assightnment #1, Question #1
  * 
  * @author Rubait Ul Ahamed, 007876180
- * @version (19th May 2020)
- * 
- *          methods: main Description:
+ * @version (20th May 2020)
  */
+
 public class AhamedRubaitA1Q1 {
 
-    private static final boolean DEBUG = true;
-
+    //path to input file
     private final static String PATH = "Input.txt";
+
+    //commands
+    private final static String ADD_COMMAND = "ADD";
+    private final static String SEARCH_BY_TITLE_COMMAND = "SEARCHT";
+    private final static String SEARCH_BY_AUTHOR_COMMAND = "SEARCHA";
+    private final static String BORROW_BOOK_COMMAND = "GETBOOK";
+    private final static String RETURN_BOOK_COMMAND = "RETURNBOOK";
+
+    //debug
+    private static final boolean DEBUG = false;
+
 
     /**
      * name: main function
      * 
      * @param Strings[]
      * @return void
-     */
+    */
     public static void main(String[] args) {
         Library bookHouse = new Library();
         try {
+            System.out.println("Processing " + PATH + "...\n");
             handleInput(PATH, bookHouse);
         } catch (Exception e) {
             e.printStackTrace();
@@ -33,11 +47,18 @@ public class AhamedRubaitA1Q1 {
                 System.out.println("can't acess " + PATH);
         } finally {
             System.out.println("program terminated normally.");
-            if(DEBUG)
-                System.out.println(bookHouse.toString());
         }
+        if(DEBUG)
+            System.out.println(bookHouse.toString());
     }
 
+
+    /**
+     * Method name: handleInput
+     * @param path path location as a String to the input file
+     * @param lib library to execute the commands from the input file
+     * @return (void) takes command from the input file to execute on library obj
+     */
     public static void handleInput(String path, Library lib) {
         File f = new File(path);
         try {
@@ -54,6 +75,14 @@ public class AhamedRubaitA1Q1 {
        
     }
 
+
+    /**
+     * Method Name: executeCommand
+     * @param command line of command to execute
+     * @param lib lib to execute command on
+     * @return (void) taken in and executes one line of command on lib.
+     *                Command ex: ADD Gaimen, Neil, American Gods
+     */
     public static void executeCommand(String command, Library lib){
         Scanner scan = null;
         String instruction = "";
@@ -68,7 +97,7 @@ public class AhamedRubaitA1Q1 {
             e.printStackTrace();
         }
 
-        if (instruction.equals("ADD")) {
+        if (instruction.equals(ADD_COMMAND)) {
          
             try {
                 lastName = scan.next();
@@ -90,10 +119,9 @@ public class AhamedRubaitA1Q1 {
                 }
             }
             add(lib, lastName, firstName, title);
-        } else if (instruction.equals("SEARCHA")){
+        } else if (instruction.equals(SEARCH_BY_AUTHOR_COMMAND)){
             try {
                 lastName = scan.next();
-                lastName = lastName.substring(0, lastName.length() - 1);
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
@@ -104,7 +132,7 @@ public class AhamedRubaitA1Q1 {
                 }
             }
             searchByAuthour(lib, lastName);
-        } else if (instruction.equals("SEARCHT")) {
+        } else if (instruction.equals(SEARCH_BY_TITLE_COMMAND)) {
             try {
                 while (scan.hasNext()){
                     title += scan.next() + " ";
@@ -119,7 +147,7 @@ public class AhamedRubaitA1Q1 {
                 }
             }
             searchByTitle(lib, title);
-        } else if (instruction.equals("GETBOOK")) {
+        } else if (instruction.equals(BORROW_BOOK_COMMAND)) {
             try {
                 lastName = scan.next();
                 lastName = lastName.substring(0, lastName.length() - 1);
@@ -140,46 +168,114 @@ public class AhamedRubaitA1Q1 {
                 }
             }
             borrowBookFromLib(lib, lastName, firstName, title);
+        } else if (instruction.equals(RETURN_BOOK_COMMAND)) {
+            try {
+                lastName = scan.next();
+                lastName = lastName.substring(0, lastName.length() - 1);
+                firstName = scan.next();
+                firstName = firstName.substring(0, firstName.length() - 1);
+                while (scan.hasNext()){
+                    title += scan.next() + " ";
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                scan.close();
+                if (DEBUG){
+                    System.out.println(instruction);
+                    System.out.println(lastName);
+                    System.out.println(firstName);
+                    System.out.println(title);
+                }
+            }
+            returnBookToLib(lib, lastName, firstName, title);
         }
     }
 
+
+    /**
+     * Method name: returnBookToLib
+     * @param lib library to return book to
+     * @param lastName last name of the author
+     * @param firstName first name of the author
+     * @param title title of the author
+     * @return (void) if book part of lib, returns it to the lib
+     */
+    public static void returnBookToLib (Library lib, String lastName, String firstName, String title) {
+        boolean result = lib.returnBook(lastName, firstName, title);
+        if(!result){
+            System.out.println("Book does not belong to this library");
+        } 
+        System.out.println("\n");
+    }
+
+
+    /**
+     * Method name: add
+     * @param lib library to add to
+     * @param lastName last name of the author
+     * @param firstName first name of the author
+     * @param title title of the author
+     * @return (void) adds book to the library
+     */
     public static void add (Library lib, String lastName, String firstName, String title){
         Book temp = new Book(lastName, firstName, title);
         lib.addBook(temp);
     }
 
+
+    /**
+     * MEthod name: searchByAuthor
+     * @param lib library to search on
+     * @param lastName last name of to search by
+     * @return (void) searches and prins out list of matched authors
+     */
     public static void searchByAuthour (Library lib, String lastName){
         String s = lib.listByAuthor(lastName);
-        System.out.print(s);
-        //formating & printingg needed
+        System.out.print(s + "\n");
     }
     
+
+    /**
+     * Method name: searchByTitle
+     * @param lib library to search on
+     * @param title string to check for title
+     * @return (void) searches and prins out list of matched titles
+     */
     public static void searchByTitle (Library lib, String title){
         String s = lib.listByTitle(title);
-        System.out.print(s);
+        System.out.print(s + "\n");
         //formating & printingg needed
     }
 
+
+    /**
+     * Method name: borrowBookFromLib
+     * @param lib library to borrow from
+     * @param lastName last name of the author
+     * @param firstName first name of the author
+     * @param title title of the author
+     * @return (void) loans book from lib
+     */
     public static void borrowBookFromLib (Library lib, String lastName, String firstName, String title) {
-        lib.loanBook(lastName, firstName, title);
-        //formating & printingg needed
+        boolean result = lib.loanBook(lastName, firstName, title);
+        if(!result){
+            System.out.println("No Such book avalable");
+        } 
+        System.out.println("\n");
     }
 }
 
 
-
 //==============================================================================================
-
 /**
  * Class Name: Book
  * 
+ * DESCRIPTION: holds data and info for a book in a library
  * COMP2140 Section D01
  * Assighnment  Assightnment #1, Question #1
  * @author   Rubait Ul Ahamed, 007876180
  * @version (15th May 2020)
- * 
- * methods: getInitials, giveOnLoan, RecieveBook
- * Description:
  */
 class Book{
 
@@ -190,7 +286,7 @@ class Book{
 
     private boolean onLoan;
 
-    private final boolean DEBUG = true;
+    private final boolean DEBUG = false;
 
     /**
      * constructor
@@ -207,7 +303,6 @@ class Book{
 
 
     /**
-
      * Method name: getStatus
      * @param void
      * @return (boolean) the onLoad variable
@@ -260,6 +355,7 @@ class Book{
         return toReturn;
     }
 
+
     /**
      * Method name: giveOnLoan
      * @param void
@@ -267,7 +363,10 @@ class Book{
      */
     public void giveOnLoan(){
         onLoan = true;
+        String msg = "Book loaned:\n" + toString();
+        System.out.println(msg);
     }
+
 
     /**
      * Method name: recieveBook
@@ -276,7 +375,10 @@ class Book{
      */
     public void recieveBook(){
         onLoan = false;
+        String msg ="Book returned:\n" + toString();
+        System.out.println(msg);
     }
+
 
     /**
      * Method Name: toString
@@ -288,15 +390,15 @@ class Book{
     public String toString(){
         String toReturn = getInitials();
         toReturn += ", " + getTitle();
-        toReturn += "(";
         if(DEBUG){
-            if(onLoan){
-                toReturn += "onLoan";
-            } else {
-                toReturn += "inLibrary";
-            }
+            toReturn += "(";
+                if(onLoan){
+                    toReturn += "onLoan";
+                } else {
+                    toReturn += "inLibrary";
+                }
+            toReturn += ")";
         }
-        toReturn += ")";
         return toReturn;
 
     }
@@ -305,17 +407,16 @@ class Book{
 
 
 //==============================================================================================
-
 /**
  * Class Name: Library
  * 
+ * DESCRIPTION: holds data and info library to store and borrow books
  * COMP2140 Section D01
  * Assighnment  Assightnment #1, Question #1
  * @author   Rubait Ul Ahamed, 007876180
  * @version (18th May 2020)
- * 
- * methods:
- * Description:
+ */
+ /* DESCRIPTION:
  * Limitations: Library can only hold MAX_BOOKS ammount. This can be set with respect to each systems config
  */
 class Library{
@@ -324,7 +425,7 @@ class Library{
     private int bookCount;
     private final int MAX_BOOKS = 50000;
 
-    private final boolean DEBUG = true;
+    private final boolean DEBUG = false;
 
     
 
@@ -368,12 +469,13 @@ class Library{
         for(int i = 0; i < getBookCount(); i++) {
             boolean match = authorLastName.equals(bookShelf[i].getAuthorLastName()); 
             if(match){
-                toReturn = bookShelf[i].toString();
+                toReturn += bookShelf[i].toString() + "\n";
             }
         }
         return toReturn;
         
     }
+
 
     /**
      * Method name: listByTitle
@@ -382,13 +484,10 @@ class Library{
      */
     public String listByTitle(String bookTitle){
         String toReturn = "Books named " + bookTitle + ":\n";
-        for (Book inHouseBook : bookShelf) {
-            boolean match = bookTitle.equals(inHouseBook.getTitle()); 
+        for (int i = 0; i < getBookCount(); i++) {
+            boolean match = bookTitle.equals(bookShelf[i].getTitle()); 
             if(match){
-                toReturn += inHouseBook.toString() + "\n";
-            } else {
-                if(DEBUG)
-                    System.out.println("No books found by " + bookTitle);
+                toReturn += bookShelf[i].toString() + "\n";
             }
         }
         return toReturn;
@@ -419,6 +518,7 @@ class Library{
         return false;
     }
 
+
     /**
      * Method name: returnBook
      * @param lastName last name of the author
@@ -435,10 +535,12 @@ class Library{
             if(notAvalable){
                 match.recieveBook();
                 toReturn = true;
+
             }
         }
         return toReturn;
     }
+
 
     /**
      * Method name: matchBook
@@ -449,29 +551,43 @@ class Library{
      * 
      */
     private Book matchBook(String lastName, String firstName, String title){
-        Book toReturn = null;
         String name = lastName + ", " + firstName;
+        if(DEBUG){
+            String debug = "finding " + title + " by ";
+            debug += name;
+            System.out.println(debug);
+        }
+
+        //creating condition variables
+        boolean nameCondition =false;
+        boolean titleCondition = false;
         boolean nameMatch = false;
         boolean titleMatch = false;
-        for (Book inHouseBook : bookShelf) {
-            boolean match = name.equals(inHouseBook.getInitials());
-            if(match){
-                nameMatch = true;
-                if(DEBUG)
-                    System.out.println("book by " + name + "found");
-                match = title.equals(inHouseBook.getTitle());
-                if(match){
-                    titleMatch = true;
-                    if(DEBUG)
-                        System.out.println("book named " + title + " found");
+
+        //innitialising condition variables
+        for (int i = 0; i < getBookCount(); i++) {
+            nameCondition = name.equals(bookShelf[i].getInitials());
+            titleCondition = title.equals(bookShelf[i].getTitle());
+            if (titleCondition) {
+                titleMatch = true;
+                if (nameCondition) {
+                    nameMatch = true;
                 }
             }
+
             if(nameMatch && titleMatch){
-                return inHouseBook;
+                if(DEBUG)
+                    System.out.println("book found");
+                return bookShelf[i];
             }
+        
         }
-        return toReturn;
+
+        //if not found    
+        System.out.println(title + " by " + name + "not found");
+        return null;
     }
+
 
     /**
      * Method name: toString
@@ -480,9 +596,9 @@ class Library{
      */
     @Override
     public String toString(){
-        String toReturn = "";
-        for (Book inHouseBook : bookShelf) {
-            toReturn += inHouseBook.toString() + "\n";
+        String toReturn = "Books in " + this.getClass().getName() + "\n";
+        for (int i = 0; i < getBookCount(); i++) {
+            toReturn += bookShelf[i].toString() + "\n";
         }
         return toReturn;
     }
@@ -496,5 +612,4 @@ class Library{
         return bookCount;
     }
 }
-
 //==============================================================================================

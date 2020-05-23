@@ -4,7 +4,7 @@ ADD Martel, Yann, Life of Pi
 ADD Atwood, Margaret, Alias Grace
 ADD Ondaatje, Michael, The English Patient
 ADD Toews, M., A Complicated Kindness
-SEARCHA Atwood,
+SEARCHA Atwood
 GETBOOK Martel, Yann, Life of Pi
 ADD Shields, Carol, The Stone Diaries
 ADD Mistry, Rohinton, A Fine Balance
@@ -13,4 +13,4 @@ GETBOOK Shields, Carol, The Stone Diaries
 ADD Margaret, Atwood, Alias Grace
 SEARCHT Alias Grace
 RETURNBOOK Martel, Yann, Life of Pi
-SEARCHA Fitzgeral
+SEARCHA Fitzgerald
