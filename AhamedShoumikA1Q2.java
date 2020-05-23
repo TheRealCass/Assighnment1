@@ -334,3 +334,29 @@ class Sudoku {
 }
 
 //==========================================================================================================
+
+/**
+ * Annwer to question1
+ * 
+ * I used a 2D int array. 
+ * 
+ * an array of integers because the game sudoku consists of numbers
+ * 1 through 9, which are integers. It was just easier to work with and calculate
+ * 
+ * i used a 2D array because it was easier to visualise as the indexies translate 
+ * rather nicely to cartisian coordinate
+ */
+
+ /**
+  * answer to question 2
+  * i wanted to not do the solve recursively because maybe in order systems
+  * it might be inefficient.
+  *
+  * the next and final approch i took feels efficient to me because it solves the
+  * puzzle the same way the human would, just faster. Essentially, it checks weather
+  * a cell is empty, and if so, it tries 1 through 9 to validate by the 3 governing rules
+  * of sudoku. Upon match, it's fulls the spot in question with the number in question, and
+  * then calls itselve again on the same bord
+  *
+  */
+  //==============================================================================================
