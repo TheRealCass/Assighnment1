@@ -2,5 +2,5 @@
 Comp2140 Assighnment1
 
 ## TO-DO
-* test all the methods in lib calss
+* make scanner work for blank spaces in input in Q1
 
