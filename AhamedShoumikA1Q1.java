@@ -14,7 +14,7 @@ import java.io.FileNotFoundException;
  * @version (20th May 2020)
  */
 
-public class AhamedRubaitA1Q1 {
+public class AhamedShoumikA1Q1 {
 
     //path to input file
     private final static String PATH = "Input.txt";

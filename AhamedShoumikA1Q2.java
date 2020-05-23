@@ -13,9 +13,9 @@ import java.util.Scanner;
  * @author Rubait Ul Ahamed, 007876180
  * @version (22th May 2020)
  */
-public class AhamedRubaitA1Q2 {    
+public class AhamedShoumikA1Q2 {    
 
-    public static final String PATH = "input2.txt";
+    public static final String PATH = "input.txt";
     public static final String EMPTY = "-";
     public static final String SPACE = " ";
     /**
